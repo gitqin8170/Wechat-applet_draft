@@ -1,0 +1,83 @@
+<!--pages/adviser/adviserhome/adviserhome.wxml-->
+      <!-- tab -->
+      <view class='navbar'>
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="navbar-item {{tab1Index==index?'bar-item-on':''}}" data-index='{{index}}' bindtap='onTab1Click'>
+            <view class='navbar-title'>{{item}}</view>
+          </view>
+        </block>
+        <view class="navbar-slider" style="left: {{sliderLeft}}px; width:50px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <!-- 内容区  swiper -->
+      <swiper duration='300' bindtransition="swiperTran" bindanimationfinish="animationfinish" current="{{tab1Index}}" bindchange='swiperChange' data-index='{{tab1Index}}' style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+        <!-- 图片页 -->
+        <swiper-item class="adviserhomeOne">
+          <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" scroll-top='{{scrollTop}}'>
+            <view>
+              <navigator url="../adviserhome/phone/phone" wx:for="{{list}}">
+                <view class="img_box" style="top:{{item.top}}px;left:{{item.left}}px">
+                  <image src="{{item.url}}" mode="widthFix" bindload="loadImage" data-index="{{index}}"></image>
+                  <view class="item_desc" style="height:{{descHeight}}px">{{item.name}}</view>
+                </view>
+              </navigator>
+            </view>
+            <view class="loading_box" wx:if="{{pageStatus}}" style="top:{{(leftHeight>rightHeight?leftHeight:rightHeight)-40}}px">
+              <view class="loading_fade_circle"></view>
+            </view>
+          </scroll-view>
+        </swiper-item>
+        <!-- 视频页 -->
+        <swiper-item>
+          <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" scroll-top='{{scrollTop}}'>
+	<view class='flex around'>
+          <view class='pr img_block' bindtap='startOnPlay' wx:for="{{videos}}" data-src="{{item.attr.src}}">
+            <view class="play_videoplay">
+              <image src="/images/play.png"></image>
+            </view>
+            <!-- 视频内容介绍 -->
+            <view class="language_user">这是我的第一个视频!!!!!!!!!</view>
+            <view class="language_video">999次播放</view>
+            <view class="language_good">999赞</view>
+            <image src="{{item.attr.cover}}"></image>
+          </view>
+        </view>
+          </scroll-view>
+        </swiper-item>
+        <!-- 文章页 -->
+        <swiper-item>
+          <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" scroll-top='{{scrollTop}}'>
+            <view class="middle" class="item">
+              <view class="middle_top">
+                <navigator url="../index/article/article" hover-class="navigator-hover">
+                  <view class="middle_top_title">
+                    这些隐藏私密的收纳空间，让你的私房钱再也不会被发现
+                  </view>
+                  <view class="middle_top_detail">
+                    <view class="tag">置顶</view>
+                    <view class="puls">一品装饰</view>
+                    <view class="num_message">20留言</view>
+                    <view class="create_time">刚刚</view>
+                  </view>
+                </navigator>
+              </view>
+              <view class="middle_one">
+                <navigator url="#" hover-class="navigator-hover">
+                  <view class="one_left">
+                    <view class="one_title">背景墙石膏线的种类 背景墙石膏线怎么做</view>
+                    <view class="middle_one_detail">
+                      <view class="tag">热</view>
+                      <view class="puls">装饰有一手</view>
+                      <view class="num_message">51留言</view>
+                      <view class="create_time">10分钟前</view>
+                    </view>
+                  </view>
+                  <view class="one_images">
+                    <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1569899931&di=660a41d84074d26cdd1e93e5e19ec8b1&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.mxtrip.cn%2FRbqqRq9XPV%3D%3D%2107759c75d472d60985a380e7a855c5f1%21w680%21h453.jpeg%40100Q_650w_1pr"
+                      rel="图片">图片</image>
+                  </view>
+                </navigator>
+              </view>
+            </view>
+          </scroll-view>
+        </swiper-item>
+      </swiper>
